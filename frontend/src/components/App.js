@@ -5,7 +5,7 @@ import PostsData from './PostsData';
 import Button from 'material-ui/Button';
 import { Link } from 'react-router-dom';
 import AddIcon from 'material-ui-icons/Add';
-
+import NotFoundError from './NotFoundError';
 import PostContentForm from './PostContentForm';
 
 
@@ -34,6 +34,8 @@ class App extends Component {
               <Route exact path="/" component={CreateNewPostButton} />
               <Route exact path="/:category" component={CreateNewPostButton} />
              <Route path="/" component={ContentArea} />
+             <Route path="*" component={NotFoundError} />
+
 
               <Switch>
                 <Route path="/post/new" component={PostContentForm} />
