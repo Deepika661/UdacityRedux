@@ -3,7 +3,7 @@ import { VOTE_COUNTER, TIMESTAMP_ORDER } from '../utils/configure';
 const orderByVoteCount = data => 
 {
     return Array.isArray(data)
-      ? data.sort((a, b) => b.voteCounter- a.voteCounter)
+      ? data.sort((a, b) => b.voteScore- a.voteScore)
       : data;
 };
 
