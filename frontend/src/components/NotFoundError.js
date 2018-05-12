@@ -4,7 +4,7 @@ const NotFoundError = () => {
   return (
     <div className="App">
       <div className="text-center">
-        <h5>Page not found</h5>
+        <h1>Page not found</h1>
       </div>
     </div>
   )

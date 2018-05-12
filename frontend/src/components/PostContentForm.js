@@ -187,7 +187,7 @@ class PostContentForm extends Component {
             <Button
 
               style={{
-                marginBottom: 20
+                marginBottom: 25
               }}
 
               onClick={this.redirect}
