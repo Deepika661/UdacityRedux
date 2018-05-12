@@ -7,7 +7,7 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import { Edit, DeleteForever } from 'material-ui-icons';
 import VoteCounter from './VoteCounter';
 import { Link } from 'react-router-dom';
-
+import NotFoundError from './NotFoundError';
 
 const Container = ({ item }) => (
       <div style=
@@ -29,9 +29,8 @@ const Container = ({ item }) => (
     />
   </div>
 );
-
 const PostShow = ({ items, handleDelete, handleVote }) => {
-  return (
+  if(items.length>0){return (
     <List>{items && items.length > 0 && items.map((item, i) => (
           <div key={i}>
           <Card 
@@ -67,6 +66,11 @@ const PostShow = ({ items, handleDelete, handleVote }) => {
           ))}
       </List>
     );
+  }
+  return(
+  <h1>Content not found </h1> 
+  )
+
   };
 
 Container.propTypes = 

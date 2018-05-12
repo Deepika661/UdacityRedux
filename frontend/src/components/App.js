@@ -34,13 +34,12 @@ class App extends Component {
               <Route exact path="/" component={CreateNewPostButton} />
               <Route exact path="/:category" component={CreateNewPostButton} />
              <Route path="/" component={ContentArea} />
-             <Route path="*" component={NotFoundError} />
 
 
               <Switch>
-                <Route path="/post/new" component={PostContentForm} />
-                <Route path="/post/edit/:postId" component={PostContentForm} />
-                <Route path="/:category/:postId" component={PostsData} />
+                <Route exact path="/post/new" component={PostContentForm} />
+                <Route exact path="/post/edit/:postId" component={PostContentForm} />
+                <Route  exact path="/:category/:postId" component={PostsData} />
               </Switch>
             </div>
     );

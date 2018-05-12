@@ -12,12 +12,14 @@ import Card from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Select from 'material-ui/Select';
+import { PostsReceive } from '../actions/post';
 
 
 class PostContentForm extends Component {
       static propTypes = {
         post: PropTypes.object,categories: PropTypes.array,
         addPostsArea: PropTypes.func.isRequired,updatePostsArea: PropTypes.func.isRequired
+
       };
 
   state = {
@@ -124,6 +126,7 @@ class PostContentForm extends Component {
                 paddingBottom: 25
               }}
             />
+{this.props.match.params.postId}
             <TextField required  id="author" label="Author"
               fullWidth value={this.state.author}
               onChange={this.handleChange('author')}
