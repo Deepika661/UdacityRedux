@@ -12,15 +12,16 @@ import Card from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Select from 'material-ui/Select';
-import { PostsReceive } from '../actions/post';
+import NotFoundError from './NotFoundError';
 
 
 class PostContentForm extends Component {
       static propTypes = {
         post: PropTypes.object,categories: PropTypes.array,
-        addPostsArea: PropTypes.func.isRequired,updatePostsArea: PropTypes.func.isRequired
-
+        addPostsArea: PropTypes.func.isRequired,
+        updatePostsArea: PropTypes.func.isRequired,
       };
+
 
   state = {
       author: this.props.post ? 
@@ -31,8 +32,17 @@ class PostContentForm extends Component {
        this.props.post.body : '',
       category: this.props.post ? 
       this.props.post.category : 'react',
-      finished: false
+      finished: false,
+
   };
+ componentDidMount()
+   {
+    const { 
+      postId } = this.props.match.params;
+
+      console.log(this.props.post)
+
+  }
 
   redirect = (
     ) => 
@@ -88,13 +98,27 @@ class PostContentForm extends Component {
   {
     const { categories } = this.props;
     const { finished } = this.state;
-
+    const postId = this.props.match.params; 
+    let flag = true;
+    console.log('finished', this.props.match.params)
+    if(!this.props.post ){
+      flag = false;
+      console.log("inininininin")
+      console.log(this.props.post)
+      console.log("length",this.props.match.params.postId)
+      if(this.props.match.params.postId== null){
+        flag=true;
+      }
+    }
+    // console.log(PostsReceive(postId));
     if (finished)
      {
       return <Redirect to={'/'} />;
     }
 
+    if(flag){
     return (
+
               <Card style=
               {{ padding: 5,
                margin: 5 }}>
@@ -126,7 +150,6 @@ class PostContentForm extends Component {
                 paddingBottom: 25
               }}
             />
-{this.props.match.params.postId}
             <TextField required  id="author" label="Author"
               fullWidth value={this.state.author}
               onChange={this.handleChange('author')}
@@ -174,7 +197,12 @@ class PostContentForm extends Component {
                 </form>
               </div>
             </Card>
-          );
+          );}
+          else{
+            return (
+              <NotFoundError/>
+              )
+          }
         }
       }
 

@@ -12,12 +12,14 @@ import { PostsReceive, deletePostsArea, AllPostsVotes } from '../actions/post';
 import {fetchCommentsArea,CommentVoting,CommentDelete} from '../actions/comment';
 import CommentShow from './CommentShow';
 import CommentFormDisplay from './CommentFormDisplay';
+import NotFoundError from './NotFoundError';
 
 
 class PostData extends Component {
         static propTypes = {
               post: PropTypes.object,comments: PropTypes.array,
-              PostsReceive: PropTypes.func.isRequired,fetchCommentsArea: PropTypes.func.isRequired,
+              PostsReceive: PropTypes.func.isRequired,
+              fetchCommentsArea: PropTypes.func.isRequired,
               deletePostsArea: PropTypes.func.isRequired,
               AllPostsVotes: PropTypes.func.isRequired,CommentVoting: PropTypes.func.isRequired,
               CommentDelete: PropTypes.func.isRequired
@@ -35,7 +37,7 @@ class PostData extends Component {
     const { 
       postId } = this.props.match.params;
 
-          this.props.PostsReceive(postId);
+          console.log("check here", this.props.PostsReceive(postId));
           this.props.fetchCommentsArea(postId);
   }
 
@@ -67,12 +69,22 @@ this.setState({ deleted: true });
       comments } = this.props;
     const { CommentEditing, 
       deleted } = this.state;
-
+    let flag = true;
+    console.log('finished', this.props.match.params)
+    if(!this.props.post ){
+      flag = false;
+      console.log("inininininin")
+      console.log(this.props.post)
+      console.log("length",this.props.match.params.postId)
+      if(this.props.match.params.postId== null){
+        flag=true;
+      }
+    } 
     if (deleted)
      {
       return <Redirect to={'/'} />;
     }
-
+    if(flag){
     return (
 
       <div>{post && (
@@ -127,6 +139,8 @@ this.setState({ deleted: true });
             )}
         </div>
       );
+    }
+    return(<NotFoundError/>)
     }
   }
 
